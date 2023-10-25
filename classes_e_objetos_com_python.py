@@ -6,15 +6,15 @@ class Geladeira:  # define uma classe chamada geladeira
         self.anoDeFabricacao = anoDeFabricacao
         self.estado = 'desligada' #atributo padrão para estado
         
-    def ligar(self):
-        self.estado = 'ligado'
+    def ligar(self):# metodo para modificar o estado para ligado
+        self.estado = 'ligada'
     
-    def desligar(self):
-        self.estado = 'desligado'
+    def desligar(self): #metodo para modificar o estado para desligado
+        self.estado = 'desligada'
         
         #Método para obtrer informações
-    def obter_informacoes(self):
-        return f"Carro: {self.marca} {self.cor} {self.anoDeFabricacao}"
+    def obter_informacoes(self): #metodo para retornar as informações do objeto
+        return f"Geladeira: {self.marca} {self.cor} {self.anoDeFabricacao} {self.estado}"
 
 
 minha_geladeira = Geladeira("Eletrolux", "hb20211", 2022)
