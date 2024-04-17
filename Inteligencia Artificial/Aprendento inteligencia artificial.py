@@ -196,7 +196,4 @@ chamada = buscarLabirinto(corpo, inicio, final, tamanho)
 print(chamada.verNovosVizinhos(2, 2))
 #Tarefa 2
 #Professor Bruno Baruffi Esteves
-#•
-#22 de mar.
-#Data de entrega: 29 de mar., 23:59
 #Segunda parte do algoritmo de busca A*
