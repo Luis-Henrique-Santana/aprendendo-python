@@ -11,9 +11,13 @@ vidas = 20
 
 while (vidas > 0):
     print("Vidas restantes: {}".format(vidas))
-    tentativa = input("Digite o numero que você acha que é o correto:")
-
+    tentativa = input("Digite o numero que você acha que é o correto ( entre 1 e 100 ): ")
     tentativa = int(tentativa)
+    
+    if(tentativa > 100 or tentativa < 1):
+        print("É PARA DIGITAR UM NUMERO ENTRE  1  E  100")
+        continue
+    
 
     print("Você digitou ", tentativa)
 
