@@ -5,8 +5,22 @@ print("---->xX Bem vindo ao jogo de Adivinhação Xx<----")
 print("**************************************")
 
 
-numero_secreto = random.randint(1,99)
-vidas = 20
+numero_secreto = random.randint(1,100)
+
+vidas = 0
+
+print("Qual o nível de dificuldade?")
+print("(1) Fácil (2) Médio (3) Difícil")
+
+nivel = int(input("Defina o nível: "))
+
+if (nivel == 1):
+    vidas = 20
+elif (nivel == 2):
+    vidas = 10
+else:
+    vidas = 5
+
 
 
 while (vidas > 0):
