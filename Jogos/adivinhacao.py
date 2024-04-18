@@ -8,6 +8,8 @@ print("**************************************")
 numero_secreto = random.randint(1,100)
 
 vidas = 0
+pontos = 0
+erros = 0
 
 print("Qual o nível de dificuldade?")
 print("(1) Fácil (2) Médio (3) Difícil")
@@ -52,8 +54,10 @@ while (vidas > 0):
             print("Sua tentativa foi menor que o numero secreto") 
 
         vidas = vidas - 1  
-          
+        erros +=1  
         
+pontos = (nivel * 1000)/erros
 
-print("Vidas restantes: ", vidas)    
+print("Vidas restantes: ", vidas)
+print("pontuação: ", round(pontos))    
 print("...FIM...")
