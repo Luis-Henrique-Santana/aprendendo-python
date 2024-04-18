@@ -1,4 +1,4 @@
-def jogar_adivinhacao():
+def jogar():
     import random
 
     print("**************************************")
@@ -62,3 +62,8 @@ def jogar_adivinhacao():
     print("Vidas restantes: ", vidas)
     print("pontuação: ", round(pontos))    
     print("...FIM...")
+
+#verifica se o arquivo é o arquivo raiz
+
+if(__name__ == "__main__"):
+    jogar()
