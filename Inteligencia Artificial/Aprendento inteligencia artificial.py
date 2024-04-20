@@ -243,6 +243,6 @@ chamada = buscarLabirinto(corpo, inicio, final, tamanho)
 chamada.buscarCaminho()
 
 
-#Tarefa 2
+
 #Professor Bruno Baruffi Esteves
 #Segunda parte do algoritmo de busca A*
