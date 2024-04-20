@@ -1,4 +1,5 @@
 import math
+import matplotlib.pyplot as plt
 
 class vetorPadrao:
     def __init__(self, X, Y, Anterior, Distancia): 
@@ -18,37 +19,7 @@ class buscarLabirinto:
         self.tamanhoy = tamanho[1]
         self.vetorAberto = []
         self.vetorFechado = []
-        
-        
-        
-        self.vetorAberto.append(vetorPadrao(0, 1, 3, 3))
-        
-        self.vetorAberto.append(vetorPadrao(2, 1, 3, 3))
-        
-        self.vetorAberto.append(vetorPadrao(3, 2, 3, 3))
-        
-        self.vetorAberto.append(vetorPadrao(3, 1, 3, 3))
-        
-        
-        
-        self.vetorFechado.append(vetorPadrao(0, 0, 3, 3))
-        
-        self.vetorFechado.append(vetorPadrao(1, 0, 3, 3))
-        
-        self.vetorFechado.append(vetorPadrao(2, 0, 3, 3))
-        
-        self.vetorFechado.append(vetorPadrao(3, 0, 3, 3))
-        
-        
-       
-        
-        
-    def verificarExistenciaVetorAberto(self,x,y): 
-        for i in self.vetorAberto:
-            if(i.X == x) and (i.Y == y):
-                return True
-        return False
-    
+        self.vetorCaminhoFinal = []
     
     
     def verNovosVizinhos(self, x, y):
@@ -64,7 +35,7 @@ class buscarLabirinto:
         if(x+1 <= self.tamanhox):
             if(self.corpo[x+1][y] == 1):
                 if(self.verificarExistenciaVetorFechado(x+1, y) == False):
-                    if(self.verificarExistenciaVetorAberto(x+1, y) == False):
+                    if(self.verificarExistenciaVetorAberto(x+1, y) == False): #erro aqui
                         saida.append([x+1,y])
                         
         #x+1 y+1
@@ -103,7 +74,7 @@ class buscarLabirinto:
                         saida.append([x-1,y])
         
         #x-1 y+1
-        if((x-1 >= 0) and (y+1>=self.tamanhoy) ):
+        if((x-1 >= 0) and (y+1<=self.tamanhoy) ):
             if(self.corpo[x-1][y+1] == 1):
                 if(self.verificarExistenciaVetorFechado(x-1, y+1) == False):
                     if(self.verificarExistenciaVetorAberto(x-1, y+1) == False):
@@ -134,7 +105,7 @@ class buscarLabirinto:
         controle = 999999
         vetorControle = []
     #verificar se vizinhos e vetorAberto estão vazios, para casos sem solução
-        if((len(vizinhos) == 0) and (len(self.vetorAberto))):
+        if((len(vizinhos) == 0) and (len(self.vetorAberto) == 0)):
             print("sem solução!!")
             return False
         
@@ -168,14 +139,84 @@ class buscarLabirinto:
             addVetorFechado.append(self.vetorAberto[posControle])
             del self.vetorAberto[posControle]
         else:
-            addVetorFechado.append(self.vetorControle[posControle])
+            addVetorFechado.append(vetorControle[posControle])
             del vetorControle[posControle]
         self.vetorFechado.append(addVetorFechado[0])
         
         for i in vetorControle:
             self.vetorAberto.append(i)
         return True
+ 
+    def gerarCaminhoFinal(self):
+        self.vetorCaminhoFinal.clear()
+        controle = -1
+        while (controle != 0):
+            if(controle == -1):
+                self.vetorCaminhoFinal.append(self.vetorFechado[len(self.vetorFechado) - 1])
+                controle = self.vetorFechado[len(self.vetorFechado) - 1].Anterior
+            else:
+                self.vetorCaminhoFinal.append(self.vetorFechado[controle])
+                controle = self.vetorFechado[controle].Anterior
+            
+            self.vetorCaminhoFinal.append(self.vetorFechado[0])
+
+    def gerarGrafico(self):
+        plt.xlim(0, self.tamanhoy + 2)
+        plt.ylim(0, self.tamanhox + 2)
+        corpo = self.corpo
         
+        for i in self.vetorCaminhoFinal:
+            corpo[i.X][i.Y] = "X"
+        
+        c=1
+        corpo.reverse()
+        for i in corpo:
+            d=1
+            for j in i:
+                if(j == 1):
+                    cor = 'blue'
+                elif(j == 0):
+                    cor = 'grey'
+                elif(j == "X"):
+                    cor = 'green'    
+                plt.text(d,c,j,backgroundcolor = cor)  
+                d = d + 1
+            c = c + 1    
+        plt.show()
+        
+    def buscarCaminho(self):
+        self.vetorFechado.append(vetorPadrao(self.iniciox, 
+                                             self.inicioy, 
+                                             0, 
+                                             self.verificarDistanciaXY
+                                             (self.iniciox, 
+                                              self.inicioy, 
+                                              self.fimx, 
+                                              self.fimy
+                                              )
+                                             )
+                                 )
+        saida = 0 
+        while (saida == 0):
+            if(self.vetorFechado == 0):
+                saida = 1
+            else:
+                x = self.vetorFechado[-1].X
+                y = self.vetorFechado[-1].Y
+                posicaoVetorFechado = len(self.vetorFechado) - 1
+                vizinhos = self.verNovosVizinhos(x, y)
+                
+                status = self.avaliarVizinhosEVetorAberto(vizinhos, posicaoVetorFechado)
+                if((self.vetorFechado[-1].Distancia > 0) and (status == True)):
+                    saida = 0 
+                else:
+                    saida = 1
+            
+        self.gerarCaminhoFinal()
+        self.gerarGrafico()
+        
+                
+                
 #---- CORPO PRINCIPAL -------
 
 corpo = [[1,1,1,1,0,1,1,1],
@@ -193,7 +234,7 @@ chamada = buscarLabirinto(corpo, inicio, final, tamanho)
 
 #----------------- AREA DE TESTES --------------
 
-print(chamada.verNovosVizinhos(2, 2))
+chamada.buscarCaminho()
 #Tarefa 2
 #Professor Bruno Baruffi Esteves
 #Segunda parte do algoritmo de busca A*
