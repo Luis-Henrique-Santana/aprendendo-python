@@ -31,11 +31,11 @@ class buscarLabirinto:
                     if(self.verificarExistenciaVetorAberto(x+1, y-1) == False):
                         saida.append([x+1,y-1])
               
-        #x+1 y
-        if(x+1 <= self.tamanhox):
+         #x+1,y
+        if ((x+1 <= self.tamanhox)):
             if(self.corpo[x+1][y] == 1):
-                if(self.verificarExistenciaVetorFechado(x+1, y) == False):
-                    if(self.verificarExistenciaVetorAberto(x+1, y) == False): #erro aqui
+                if (self.verificarExistenciaVetorAberto(x+1, y) == False):
+                    if(self.verificarExistenciaVetorFechado(x+1, y) == False):
                         saida.append([x+1,y])
                         
         #x+1 y+1
@@ -82,6 +82,12 @@ class buscarLabirinto:
                         
         return saida;
     
+    def verificarExistenciaVetorAberto(self,x,y):
+        #Roda o vetor aberto conferindo se o x,y esta la
+        for i in self.vetorAberto:
+            if((i.X == x) and (i.Y == y)):
+                return True
+        return False
     
     def verificarExistenciaVetorFechado(self,x,y): 
         for i in self.vetorFechado:
@@ -220,8 +226,8 @@ class buscarLabirinto:
 #---- CORPO PRINCIPAL -------
 
 corpo = [[1,1,1,1,0,1,1,1],
-         [1,0,0,0,0,1,1,1],
-         [1,1,1,1,0,1,1,1],
+         [1,0,0,1,0,1,0,1],
+         [1,1,1,1,0,1,0,1],
          [1,1,1,1,1,1,1,1]]
 
 tamanho = [3,7]
@@ -235,6 +241,8 @@ chamada = buscarLabirinto(corpo, inicio, final, tamanho)
 #----------------- AREA DE TESTES --------------
 
 chamada.buscarCaminho()
+
+
 #Tarefa 2
 #Professor Bruno Baruffi Esteves
 #Segunda parte do algoritmo de busca A*
