@@ -1,4 +1,5 @@
 def jogar():
+    #começo do jogo
     print("**************************************")
     print("---->xX Bem vindo ao jogo de Forca Xx<----")
     print("**************************************")
@@ -15,7 +16,7 @@ def jogar():
     while(not enforcou and not acertou):
         chute = input("Desce a LETRAAAA: ")
         chute = chute.strip()
-        
+         
         
         index = 0
         for letra in palavra_secreta:
