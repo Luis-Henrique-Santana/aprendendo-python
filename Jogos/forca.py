@@ -5,9 +5,12 @@ def jogar():
     print("**************************************")
 
     #.upper deixa tudo em maiusculo
-    palavra_secreta = "batata".upper()
+    palavra_secreta = "Abacate".upper()
     
-    letras_acertadas = ["_", "_", "_", "_", "_", "_"]
+    letras_acertadas = []
+    
+    for letras in palavra_secreta:
+        letras_acertadas.append('_')
     
     enforcou = False   
     acertou = False
