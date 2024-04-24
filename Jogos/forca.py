@@ -7,10 +7,8 @@ def jogar():
     #.upper deixa tudo em maiusculo
     palavra_secreta = "Abacate".upper()
     
-    letras_acertadas = []
-    
-    for letras in palavra_secreta:
-        letras_acertadas.append('_')
+    letras_acertadas = ["_" for letras in palavra_secreta]
+
     
     enforcou = False   
     acertou = False
