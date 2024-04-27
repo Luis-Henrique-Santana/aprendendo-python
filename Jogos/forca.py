@@ -1,13 +1,25 @@
+import random
+
 def jogar():
     #começo do jogo
     print("**************************************")
     print("---->xX Bem vindo ao jogo de Forca Xx<----")
     print("**************************************")
 
-    #.upper deixa tudo em maiusculo
-    palavra_secreta = "Abacate".upper()
+    arquivo = open("palavras.txt", "r")
+    palavras = []
+
+    for linha in arquivo:
+        linha = linha.strip()
+        palavras.append(linha)
+
+    arquivo.close()
     
-    letras_acertadas = ["_" for letras in palavra_secreta]
+    numero = random.randrange(0,len(palavras))
+    
+    palavra_secreta = palavras[numero].upper()
+    
+    letras_acertadas = ["_" for letra in palavra_secreta]
 
     
     enforcou = False   
