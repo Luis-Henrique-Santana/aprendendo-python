@@ -1,13 +1,13 @@
 import matplotlib.pyplot as plt
 from random import random
 
-class produto():
+class Produto():
     def __init__(self, nome, espaço, valor):
         self.nome = nome
         self.espaco = espaço
         self.valor = valor
         
-class individuo():
+class Individuo():
     def __init__(self, espacos, valores, limites_espacos, geracao = 0):
         self.espacos = espacos
         self.valores = valores
@@ -60,6 +60,38 @@ class individuo():
         
         return filhos
     
+class AlgoritmoGenetico():
+    def __init__(self, tamanho_populacao):
+        self.tamanho_populacao = tamanho_populacao
+        self.populacao = [] #populacao atual do ciclo
+        self.geracao = 0
+        self.melhor_solucao = 0
+        self.lista_solucoes = []
+        
+    def inicia_populacao(self):
+        for i in range(self.tamanho_populacao):
+            self.populacao.append(Individuo(espacos, valores, limites_espacos))
+        self.melhor_solucao = self.populacao(0)
+    
+    def ordena_populacao(self):
+        self.populacao = sorted(self.populacao, 
+                                key = lambda populacao.nota_avaliacao, reverse = True)
+                              
+    def melhor_individuo(self, melhor_individuo_atual):
+        if melhor_individuo_atual.nota_avaliacao > self.melhor_solucao.nota_avaliacao
+            self.melhor_solucao = melhor_individuo_atual
+        
+    def soma_avaliacoes(self):
+        soma = 0
+        for individuo in self.populacao:
+            soma += individuo.nota_avaliacao
+            
+        return soma
+        
+    def visualiza_geracao(self):
+        melhor = self.populacao(0)
+        print("G: %s -> valor: %s Espaço: %s cromossomo: %s" %(self.populacao[0].geracao, melhor.nota_avaliacao, melhor.espaco_usado, melhor.cromossomo ))
+        
 lista_produtos = []
 lista_produtos.append(produto("Geladeira", 0.751, 999.99))
 lista_produtos.append(produto("Iphone", 0.000089, 2911.12))
@@ -100,4 +132,3 @@ print(prod.cromossomo)
 print(prod2.cromossomo)
 print(filhos[0].cromossomo)
 print(filhos[1].cromossomo)
-
